@@ -12,6 +12,8 @@ bot = commands.Bot(intents=intents)
 
 sent_halkarz = []
 
+# burakozcan01
+
 @bot.event
 async def on_ready():
     print(f'Logged in as {bot.user.name}')
@@ -20,6 +22,8 @@ async def on_ready():
 async def fetch_data(url):
     response = requests.get(url)
     return response.text
+
+# burakozcan01
 
 def check_for_new_halkarz(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
@@ -47,6 +51,8 @@ def check_for_new_halkarz(html_content):
 
     return latest_halkarz
 
+# burakozcan01
+
 @tasks.loop(minutes=1)
 async def scrape_data():
     url = 'https://halkarz.com/'
@@ -60,6 +66,8 @@ async def scrape_data():
             message = f"Yeni bir halka arz geldi!\n"
             message += f'Şirket: {halkarz["Şirket"]}\nTarih: {halkarz["Tarih"]}\nDetaylar için [buraya tıklayın]({halkarz["Detaylar"]})\n\n'
             await channel.send(message)
+
+# burakozcan01
 
 if __name__ == "__main__":
     loop = asyncio.get_event_loop()
