@@ -1,29 +1,31 @@
 import asyncio
-import requests
+import aiohttp
 from bs4 import BeautifulSoup
-import discord
-from discord.ext import commands, tasks
+import json
+import logging
+import yaml
+import os
 
-intents = discord.Intents.default()
-intents.typing = False
-intents.presences = False
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
-bot = commands.Bot(intents=intents)
+with open('config.yaml', 'r') as file:
+    config = yaml.safe_load(file)
 
+sent_halkarz_file = config['sent_halkarz_file']
 sent_halkarz = []
 
-# burakozcan01
-
-@bot.event
-async def on_ready():
-    print(f'Logged in as {bot.user.name}')
-    scrape_data.start()
+if os.path.exists(sent_halkarz_file):
+    with open(sent_halkarz_file, 'r') as file:
+        sent_halkarz = json.load(file)
 
 async def fetch_data(url):
-    response = requests.get(url)
-    return response.text
-
-# burakozcan01
+    async with aiohttp.ClientSession() as session:
+        async with session.get(url) as response:
+            if response.status == 200:
+                return await response.text()
+            else:
+                logging.error(f"Failed to fetch data: HTTP {response.status}")
+                return None
 
 def check_for_new_halkarz(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
@@ -51,24 +53,37 @@ def check_for_new_halkarz(html_content):
 
     return latest_halkarz
 
-# burakozcan01
+async def send_message(webhook_url, message):
+    async with aiohttp.ClientSession() as session:
+        webhook = discord.Webhook.from_url(webhook_url, adapter=discord.AsyncWebhookAdapter(session))
+        await webhook.send(message)
 
-@tasks.loop(minutes=1)
 async def scrape_data():
-    url = 'https://halkarz.com/'
-    html_content = await fetch_data(url)
-    latest_halkarz = check_for_new_halkarz(html_content)
-    channel_id = KANALID  # Kanal ID'sini buraya ekleyin
-    channel = bot.get_channel(channel_id)
+    url = config['scrape_url']
+    try:
+        html_content = await fetch_data(url)
+        if html_content:
+            latest_halkarz = check_for_new_halkarz(html_content)
+            webhook_url = config['webhook_url']
 
-    if latest_halkarz:
-        for halkarz in latest_halkarz:
-            message = f"Yeni bir halka arz geldi!\n"
-            message += f'Şirket: {halkarz["Şirket"]}\nTarih: {halkarz["Tarih"]}\nDetaylar için [buraya tıklayın]({halkarz["Detaylar"]})\n\n'
-            await channel.send(message)
+            if latest_halkarz:
+                for halkarz in latest_halkarz:
+                    message = (
+                        f"Yeni bir halka arz geldi!\n"
+                        f'Şirket: {halkarz["Şirket"]}\n'
+                        f'Tarih: {halkarz["Tarih"]}\n'
+                        f'Detaylar için [buraya tıklayın]({halkarz["Detaylar"]})\n\n'
+                    )
+                    await send_message(webhook_url, message)
+                with open(sent_halkarz_file, 'w') as file:
+                    json.dump(sent_halkarz, file)
+    except Exception as e:
+        logging.error(f"Error during scraping: {e}")
 
-# burakozcan01
+async def main():
+    while True:
+        await scrape_data()
+        await asyncio.sleep(config['check_interval'])
 
 if __name__ == "__main__":
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(bot.start('TOKEN'))  # Discord bot tokeninizi buraya ekleyin
+    asyncio.run(main())
