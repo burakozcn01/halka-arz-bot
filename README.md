@@ -1,4 +1,4 @@
-# Halka Arz Takip
+# python-halka-arz
 
 This project is designed to track IPO (Initial Public Offering) announcements and send notifications to a specified Discord channel using web scraping techniques.
 
@@ -13,7 +13,7 @@ This project is designed to track IPO (Initial Public Offering) announcements an
 
 ## Introduction
 
-Halka Arz Takip is a tool for monitoring IPO announcements and sending real-time notifications to a specified Discord channel. The application uses web scraping to gather the latest IPO data and automates the process of keeping users informed.
+python-halka-arz is a tool for monitoring IPO announcements and sending real-time notifications to a specified Discord channel. The application uses web scraping to gather the latest IPO data and automates the process of keeping users informed.
 
 ## Features
 
@@ -27,19 +27,14 @@ To get started with Halka Arz Takip, follow these steps:
 
 1. **Clone the repository:**
     ```sh
-    git clone https://github.com/burakozcn01/halka-arz-takip.git
-    cd halka-arz-takip
+    git clone https://github.com/burakozcn01/python-halka-arz.git
+    cd python-halka-arz
     ```
 
 2. **Create and activate a virtual environment:**
     ```sh
     python3 -m venv env
     source env/bin/activate  # On Windows use `env\Scripts\activate`
-    ```
-
-3. **Install the required dependencies:**
-    ```sh
-    pip install -r requirements.txt
     ```
 
 ## Usage
@@ -67,4 +62,4 @@ This project is intended for educational purposes only. Use it responsibly and a
 
 ---
 
-Thank you for using Halka Arz Takip! If you have any questions or feedback, please feel free to open an issue or contact us.
+If you have any questions or feedback, please feel free to open an issue or contact us.
