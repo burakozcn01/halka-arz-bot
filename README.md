@@ -50,7 +50,7 @@ To get started with Halka Arz Takip, follow these steps:
 
 Before running the script, you need to configure the Discord webhook URL:
 
-1. **Open `main.py`** and find the section where the Discord webhook URL is specified.
+1. **Open `config.yaml`** and find the section where the Discord webhook URL is specified.
 2. **Replace the placeholder URL with your actual Discord webhook URL:**
     ```python
     DISCORD_WEBHOOK_URL = "your_discord_webhook_url_here"
