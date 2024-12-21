@@ -1,9 +1,10 @@
-# python-halka-arz
+# Halka Arz Bot
 
-This project is designed to track IPO (Initial Public Offering) announcements and send notifications to a specified Discord channel using web scraping techniques.
+A tool designed to track IPO (Initial Public Offering) announcements and send notifications to a specified Discord channel using web scraping techniques.
 
-## Table of Contents
+---
 
+## 📖 Table of Contents
 - [Introduction](#introduction)
 - [Features](#features)
 - [Installation](#installation)
@@ -11,55 +12,73 @@ This project is designed to track IPO (Initial Public Offering) announcements an
 - [Configuration](#configuration)
 - [Disclaimer](#disclaimer)
 
-## Introduction
+---
 
-python-halka-arz is a tool for monitoring IPO announcements and sending real-time notifications to a specified Discord channel. The application uses web scraping to gather the latest IPO data and automates the process of keeping users informed.
+## 📌 Introduction
 
-## Features
+**Halka Arz Bot** is a utility for monitoring IPO announcements and delivering real-time updates to a designated Discord channel. It uses web scraping to fetch the latest IPO information, automating the process of keeping users informed.
 
-- **Web Scraping:** Automatically scrapes IPO information from relevant websites.
-- **Discord Notifications:** Sends notifications to a specified Discord channel.
-- **Automation:** Runs at regular intervals to ensure up-to-date information.
+---
 
-## Installation
+## ✨ Features
 
-To get started with Halka Arz Takip, follow these steps:
+- **Web Scraping**: Automatically gathers IPO data from relevant websites.
+- **Discord Notifications**: Sends timely alerts to a specified Discord channel.
+- **Automation**: Operates at regular intervals to ensure the latest information is always available.
 
-1. **Clone the repository:**
+---
+
+## ⚙️ Installation
+
+Follow these steps to set up **Halka Arz Bot**:
+
+1. **Clone the repository**:
     ```sh
-    git clone https://github.com/burakozcn01/python-halka-arz.git
-    cd python-halka-arz
+    git clone https://github.com/burakozcn01/halka-arz-bot.git
+    cd halka-arz-bot
     ```
 
-2. **Create and activate a virtual environment:**
+2. **Set up a virtual environment**:
     ```sh
     python3 -m venv env
-    source env/bin/activate  # On Windows use `env\Scripts\activate`
+    source env/bin/activate  # For Windows: `env\Scripts\activate`
     ```
 
-## Usage
+3. **Install required dependencies**:
+    ```sh
+    pip install -r requirements.txt
+    ```
 
-1. **Run the script:**
+---
+
+## 🚀 Usage
+
+1. **Run the script manually**:
     ```sh
     python main.py
     ```
 
-2. **Automate the script:** Use a task scheduler (e.g., cron job, Windows Task Scheduler) to run the script at regular intervals.
-
-## Configuration
-
-Before running the script, you need to configure the Discord webhook URL:
-
-1. **Open `config.yaml`** and find the section where the Discord webhook URL is specified.
-2. **Replace the placeholder URL with your actual Discord webhook URL:**
-    ```python
-    DISCORD_WEBHOOK_URL = "your_discord_webhook_url_here"
-    ```
-
-## Disclaimer
-
-This project is intended for educational purposes only. Use it responsibly and at your own risk. The author is not responsible for any misuse of this tool.
+2. **Automate the script**:
+   - Use a task scheduler like **cron jobs** (Linux/macOS) or **Task Scheduler** (Windows) to execute the script at desired intervals.
 
 ---
 
-If you have any questions or feedback, please feel free to open an issue or contact us.
+## 🛠️ Configuration
+
+Before running the script, ensure the correct configuration:
+
+1. Open the `config.yaml` file.
+2. Update the Discord webhook URL in the configuration:
+    ```yaml
+    DISCORD_WEBHOOK_URL: "your_discord_webhook_url_here"
+    ```
+
+---
+
+## ⚠️ Disclaimer
+
+This project is for **educational purposes only**. Use it responsibly and in compliance with applicable laws. The creator is not liable for any misuse or potential issues caused by this tool.
+
+---
+
+For feedback, questions, or reporting issues, please open an issue on the repository or contact us.
