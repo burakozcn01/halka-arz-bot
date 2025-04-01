@@ -1,4 +1,3 @@
 scrape_url: 'https://halkarz.com/'
-webhook_url: 'https://discord.com/api/webhooks/your_webhook_url'  
 check_interval: 300
 sent_halkarz_file: 'sent_halkarz.json'
